@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Segmentación de Clientes del Centro Comercial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            max-height: 50vh;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8">
+
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Conociendo a Nuestros Clientes</h1>
+            <p class="text-lg md:text-xl text-gray-600 mt-2">Un análisis de segmentación para un marketing efectivo</p>
+        </header>
+
+        <section class="mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-center mb-6">Visualización General de Clusters</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    <div class="lg:col-span-2 chart-container">
+                        <canvas id="scatterChart"></canvas>
+                    </div>
+                    <div class="chart-container h-64 lg:h-full">
+                        <canvas id="donutChart"></canvas>
+                    </div>
+                </div>
+                <p class="text-center mt-6 text-gray-600">El gráfico de dispersión muestra los cinco segmentos de clientes basados en su ingreso anual y puntuación de gasto. El gráfico de dona ilustra la proporción de clientes en cada cluster.</p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8">Los 5 Segmentos Clave de Clientes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #00A6A6;">Cluster 0: Clientes Medios/Generales</h3>
+                    <ul class="space-y-3 text-gray-700 flex-grow">
+                        <li><span class="font-semibold">👥 Cantidad:</span> 81 clientes (el grupo más grande)</li>
+                        <li><span class="font-semibold">💳 Perfil de Gasto:</span> Ingreso y Gasto promedio.</li>
+                        <li><span class="font-semibold">🎂 Edad Típica:</span> ~43 años (muy diverso).</li>
+                        <li><span class="font-semibold">♀️ Género:</span> Ligeramente más mujeres.</li>
+                    </ul>
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <h4 class="font-bold mb-2 text-gray-800">Marketing Clave:</h4>
+                        <p class="text-sm text-gray-600">Fomentar la retención y la venta cruzada con ofertas generales y programas de puntos.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #75B79E;">Cluster 1: Clientes de Alto Valor</h3>
+                    <ul class="space-y-3 text-gray-700 flex-grow">
+                        <li><span class="font-semibold">👥 Cantidad:</span> 39 clientes</li>
+                        <li><span class="font-semibold">💳 Perfil de Gasto:</span> Altos ingresos y alto gasto.</li>
+                        <li><span class="font-semibold">🎂 Edad Típica:</span> ~33 años (Jóvenes-Adultos).</li>
+                        <li><span class="font-semibold">🚻 Género:</span> Distribución equilibrada.</li>
+                    </ul>
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <h4 class="font-bold mb-2 text-gray-800">Marketing Clave:</h4>
+                        <p class="text-sm text-gray-600">Programas VIP, ofertas exclusivas y productos premium para maximizar la lealtad.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #F2E86D;">Cluster 2: Gasto Impulsivo</h3>
+                    <ul class="space-y-3 text-gray-700 flex-grow">
+                        <li><span class="font-semibold">👥 Cantidad:</span> 22 clientes</li>
+                        <li><span class="font-semibold">💳 Perfil de Gasto:</span> Bajos ingresos, ¡pero alto gasto!</li>
+                        <li><span class="font-semibold">🎂 Edad Típica:</span> ~25 años (el grupo más joven).</li>
+                        <li><span class="font-semibold">♀️ Género:</span> Ligeramente más mujeres.</li>
+                    </ul>
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <h4 class="font-bold mb-2 text-gray-800">Marketing Clave:</h4>
+                        <p class="text-sm text-gray-600">Promociones, descuentos y marketing en redes sociales para atraer a este público joven.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #F2B263;">Cluster 3: Ricos Cautos</h3>
+                    <ul class="space-y-3 text-gray-700 flex-grow">
+                        <li><span class="font-semibold">👥 Cantidad:</span> 35 clientes</li>
+                        <li><span class="font-semibold">💳 Perfil de Gasto:</span> Altos ingresos, pero bajo gasto.</li>
+                        <li><span class="font-semibold">🎂 Edad Típica:</span> ~41 años (Adultos).</li>
+                        <li><span class="font-semibold">♂️ Género:</span> Ligeramente más hombres.</li>
+                    </ul>
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <h4 class="font-bold mb-2 text-gray-800">Marketing Clave:</h4>
+                        <p class="text-sm text-gray-600">Atraer con servicios de lujo y eventos exclusivos. Investigar su bajo nivel de gasto.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col transform hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #F26B5E;">Cluster 4: Clientes de Bajo Valor</h3>
+                    <ul class="space-y-3 text-gray-700 flex-grow">
+                        <li><span class="font-semibold">👥 Cantidad:</span> 23 clientes</li>
+                        <li><span class="font-semibold">💳 Perfil de Gasto:</span> Bajos ingresos y bajo gasto.</li>
+                        <li><span class="font-semibold">🎂 Edad Típica:</span> ~45 años (el grupo más maduro).</li>
+                        <li><span class="font-semibold">♀️ Género:</span> Ligeramente más mujeres.</li>
+                    </ul>
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <h4 class="font-bold mb-2 text-gray-800">Marketing Clave:</h4>
+                        <p class="text-sm text-gray-600">Campañas de reactivación de bajo costo y programas de puntos sencillos.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <section class="mb-12">
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-center mb-6">Análisis Demográfico Comparativo</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="chart-container">
+                        <canvas id="ageChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="genderChart"></canvas>
+                    </div>
+                </div>
+                 <p class="text-center mt-6 text-gray-600">Comparación de la edad media y la distribución de género entre los diferentes clusters.</p>
+            </div>
+        </section>
+
+        <footer class="text-center mt-10 pt-6 border-t border-gray-300">
+            <p class="text-gray-700 font-semibold">Conclusión</p>
+            <p class="text-gray-600 max-w-3xl mx-auto">Esta segmentación permite al centro comercial pasar de un marketing masivo a estrategias dirigidas y personalizadas, maximizando el impacto y la eficiencia de las campañas para cada tipo de cliente.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const customerData = [
+            { income: 15, score: 39, cluster: 4 }, { income: 15, score: 81, cluster: 2 }, { income: 16, score: 6, cluster: 4 },
+            { income: 16, score: 77, cluster: 2 }, { income: 17, score: 40, cluster: 4 }, { income: 17, score: 76, cluster: 2 },
+            { income: 18, score: 6, cluster: 4 }, { income: 18, score: 94, cluster: 2 }, { income: 19, score: 3, cluster: 4 },
+            { income: 19, score: 72, cluster: 2 }, { income: 19, score: 14, cluster: 4 }, { income: 19, score: 99, cluster: 2 },
+            { income: 20, score: 15, cluster: 4 }, { income: 20, score: 77, cluster: 2 }, { income: 20, score: 13, cluster: 4 },
+            { income: 20, score: 79, cluster: 2 }, { income: 21, score: 35, cluster: 4 }, { income: 21, score: 66, cluster: 2 },
+            { income: 23, score: 29, cluster: 4 }, { income: 23, score: 98, cluster: 2 }, { income: 24, score: 35, cluster: 4 },
+            { income: 24, score: 73, cluster: 2 }, { income: 25, score: 5, cluster: 4 }, { income: 25, score: 73, cluster: 2 },
+            { income: 28, score: 14, cluster: 4 }, { income: 28, score: 82, cluster: 2 }, { income: 28, score: 32, cluster: 4 },
+            { income: 28, score: 61, cluster: 0 }, { income: 29, score: 31, cluster: 4 }, { income: 29, score: 87, cluster: 2 },
+            { income: 30, score: 4, cluster: 4 }, { income: 30, score: 73, cluster: 2 }, { income: 33, score: 4, cluster: 4 },
+            { income: 33, score: 92, cluster: 2 }, { income: 33, score: 14, cluster: 4 }, { income: 33, score: 81, cluster: 2 },
+            { income: 34, score: 17, cluster: 4 }, { income: 34, score: 73, cluster: 2 }, { income: 37, score: 26, cluster: 4 },
+            { income: 37, score: 75, cluster: 2 }, { income: 38, score: 35, cluster: 4 }, { income: 38, score: 92, cluster: 2 },
+            { income: 39, score: 36, cluster: 0 }, { income: 39, score: 61, cluster: 0 }, { income: 39, score: 28, cluster: 4 },
+            { income: 39, score: 65, cluster: 0 }, { income: 40, score: 55, cluster: 0 }, { income: 40, score: 47, cluster: 0 },
+            { income: 40, score: 42, cluster: 0 }, { income: 40, score: 42, cluster: 0 }, { income: 42, score: 52, cluster: 0 },
+            { income: 42, score: 60, cluster: 0 }, { income: 43, score: 54, cluster: 0 }, { income: 43, score: 60, cluster: 0 },
+            { income: 43, score: 45, cluster: 0 }, { income: 43, score: 41, cluster: 0 }, { income: 44, score: 50, cluster: 0 },
+            { income: 44, score: 46, cluster: 0 }, { income: 46, score: 51, cluster: 0 }, { income: 46, score: 46, cluster: 0 },
+            { income: 46, score: 56, cluster: 0 }, { income: 46, score: 55, cluster: 0 }, { income: 47, score: 52, cluster: 0 },
+            { income: 47, score: 59, cluster: 0 }, { income: 48, score: 51, cluster: 0 }, { income: 48, score: 59, cluster: 0 },
+            { income: 48, score: 50, cluster: 0 }, { income: 48, score: 48, cluster: 0 }, { income: 48, score: 59, cluster: 0 },
+            { income: 48, score: 47, cluster: 0 }, { income: 49, score: 55, cluster: 0 }, { income: 49, score: 42, cluster: 0 },
+            { income: 50, score: 49, cluster: 0 }, { income: 50, score: 56, cluster: 0 }, { income: 54, score: 47, cluster: 0 },
+            { income: 54, score: 54, cluster: 0 }, { income: 54, score: 53, cluster: 0 }, { income: 54, score: 48, cluster: 0 },
+            { income: 54, score: 52, cluster: 0 }, { income: 54, score: 42, cluster: 0 }, { income: 54, score: 51, cluster: 0 },
+            { income: 54, score: 55, cluster: 0 }, { income: 54, score: 41, cluster: 0 }, { income: 54, score: 44, cluster: 0 },
+            { income: 54, score: 57, cluster: 0 }, { income: 54, score: 46, cluster: 0 }, { income: 57, score: 58, cluster: 0 },
+            { income: 57, score: 55, cluster: 0 }, { income: 58, score: 60, cluster: 0 }, { income: 58, score: 46, cluster: 0 },
+            { income: 59, score: 55, cluster: 0 }, { income: 59, score: 41, cluster: 0 }, { income: 60, score: 49, cluster: 0 },
+            { income: 60, score: 40, cluster: 0 }, { income: 60, score: 42, cluster: 0 }, { income: 60, score: 52, cluster: 0 },
+            { income: 60, score: 47, cluster: 0 }, { income: 60, score: 50, cluster: 0 }, { income: 61, score: 42, cluster: 0 },
+            { income: 61, score: 49, cluster: 0 }, { income: 62, score: 41, cluster: 0 }, { income: 62, score: 48, cluster: 0 },
+            { income: 62, score: 59, cluster: 0 }, { income: 62, score: 55, cluster: 0 }, { income: 62, score: 56, cluster: 0 },
+            { income: 62, score: 42, cluster: 0 }, { income: 63, score: 50, cluster: 0 }, { income: 63, score: 46, cluster: 0 },
+            { income: 63, score: 43, cluster: 0 }, { income: 63, score: 48, cluster: 0 }, { income: 63, score: 52, cluster: 0 },
+            { income: 63, score: 54, cluster: 0 }, { income: 64, score: 42, cluster: 0 }, { income: 64, score: 46, cluster: 0 },
+            { income: 65, score: 48, cluster: 0 }, { income: 65, score: 50, cluster: 0 }, { income: 65, score: 43, cluster: 0 },
+            { income: 65, score: 59, cluster: 0 }, { income: 67, score: 43, cluster: 0 }, { income: 67, score: 57, cluster: 0 },
+            { income: 67, score: 56, cluster: 0 }, { income: 67, score: 40, cluster: 0 }, { income: 69, score: 58, cluster: 0 },
+            { income: 69, score: 91, cluster: 1 }, { income: 70, score: 29, cluster: 0 }, { income: 70, score: 77, cluster: 1 },
+            { income: 71, score: 35, cluster: 0 }, { income: 71, score: 95, cluster: 1 }, { income: 71, score: 11, cluster: 3 },
+            { income: 71, score: 75, cluster: 1 }, { income: 71, score: 9, cluster: 3 }, { income: 71, score: 75, cluster: 1 },
+            { income: 72, score: 34, cluster: 0 }, { income: 72, score: 71, cluster: 1 }, { income: 73, score: 5, cluster: 3 },
+            { income: 73, score: 88, cluster: 1 }, { income: 73, score: 7, cluster: 3 }, { income: 73, score: 73, cluster: 1 },
+            { income: 74, score: 10, cluster: 3 }, { income: 74, score: 72, cluster: 1 }, { income: 75, score: 5, cluster: 3 },
+            { income: 75, score: 93, cluster: 1 }, { income: 76, score: 40, cluster: 0 }, { income: 76, score: 87, cluster: 1 },
+            { income: 77, score: 12, cluster: 3 }, { income: 77, score: 97, cluster: 1 }, { income: 77, score: 36, cluster: 0 },
+            { income: 77, score: 74, cluster: 1 }, { income: 78, score: 22, cluster: 3 }, { income: 78, score: 90, cluster: 1 },
+            { income: 78, score: 17, cluster: 3 }, { income: 78, score: 88, cluster: 1 }, { income: 78, score: 20, cluster: 3 },
+            { income: 78, score: 76, cluster: 1 }, { income: 78, score: 16, cluster: 3 }, { income: 78, score: 89, cluster: 1 },
+            { income: 78, score: 1, cluster: 3 }, { income: 78, score: 78, cluster: 1 }, { income: 78, score: 1, cluster: 3 },
+            { income: 78, score: 73, cluster: 1 }, { income: 79, score: 35, cluster: 0 }, { income: 79, score: 83, cluster: 1 },
+            { income: 81, score: 5, cluster: 3 }, { income: 81, score: 93, cluster: 1 }, { income: 85, score: 26, cluster: 3 },
+            { income: 85, score: 75, cluster: 1 }, { income: 86, score: 20, cluster: 3 }, { income: 86, score: 95, cluster: 1 },
+            { income: 87, score: 27, cluster: 3 }, { income: 87, score: 63, cluster: 1 }, { income: 87, score: 13, cluster: 3 },
+            { income: 87, score: 75, cluster: 1 }, { income: 87, score: 10, cluster: 3 }, { income: 87, score: 92, cluster: 1 },
+            { income: 88, score: 13, cluster: 3 }, { income: 88, score: 86, cluster: 1 }, { income: 88, score: 15, cluster: 3 },
+            { income: 88, score: 69, cluster: 1 }, { income: 93, score: 14, cluster: 3 }, { income: 93, score: 90, cluster: 1 },
+            { income: 97, score: 32, cluster: 3 }, { income: 97, score: 86, cluster: 1 }, { income: 98, score: 15, cluster: 3 },
+            { income: 98, score: 88, cluster: 1 }, { income: 99, score: 39, cluster: 3 }, { income: 99, score: 97, cluster: 1 },
+            { income: 101, score: 24, cluster: 3 }, { income: 101, score: 68, cluster: 1 }, { income: 103, score: 17, cluster: 3 },
+            { income: 103, score: 85, cluster: 1 }, { income: 103, score: 23, cluster: 3 }, { income: 103, score: 69, cluster: 1 },
+            { income: 113, score: 8, cluster: 3 }, { income: 113, score: 91, cluster: 1 }, { income: 120, score: 16, cluster: 3 },
+            { income: 120, score: 79, cluster: 1 }, { income: 126, score: 28, cluster: 3 }, { income: 126, score: 74, cluster: 1 },
+            { income: 137, score: 18, cluster: 3 }, { income: 137, score: 83, cluster: 1 }
+        ];
+
+        const clusterColors = ['#00A6A6', '#75B79E', '#F2E86D', '#F2B263', '#F26B5E'];
+        const clusterNames = [
+            'Cluster 0: Medios/Generales', 
+            'Cluster 1: Alto Valor', 
+            'Cluster 2: Gasto Impulsivo', 
+            'Cluster 3: Ricos Cautos', 
+            'Cluster 4: Bajo Valor'
+        ];
+        
+        const tooltipCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        const scatterCtx = document.getElementById('scatterChart').getContext('2d');
+        const scatterChart = new Chart(scatterCtx, {
+            type: 'scatter',
+            data: {
+                datasets: clusterNames.map((name, i) => ({
+                    label: name,
+                    data: customerData.filter(d => d.cluster === i).map(d => ({ x: d.income, y: d.score })),
+                    backgroundColor: clusterColors[i],
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }))
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Ingreso Anual (k$)' }
+                    },
+                    y: {
+                        title: { display: true, text: 'Puntuación de Gasto (1-100)' }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += `(Ingreso: ${context.parsed.x}, Gasto: ${context.parsed.y})`;
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const donutCtx = document.getElementById('donutChart').getContext('2d');
+        const donutChart = new Chart(donutCtx, {
+            type: 'doughnut',
+            data: {
+                labels: clusterNames,
+                datasets: [{
+                    data: [81, 39, 22, 35, 23],
+                    backgroundColor: clusterColors,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        const ageCtx = document.getElementById('ageChart').getContext('2d');
+        const ageChart = new Chart(ageCtx, {
+            type: 'bar',
+            data: {
+                labels: clusterNames.map(name => name.split(': ')[1]),
+                datasets: [{
+                    label: 'Edad Media',
+                    data: [42.7, 32.7, 25.3, 41.1, 45.2],
+                    backgroundColor: clusterColors
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, title: { display: true, text: 'Edad' } } },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        const genderCtx = document.getElementById('genderChart').getContext('2d');
+        const genderChart = new Chart(genderCtx, {
+            type: 'bar',
+            data: {
+                labels: clusterNames.map(name => name.split(': ')[1]),
+                datasets: [
+                    { label: 'Hombres', data: [33, 18, 9, 19, 9], backgroundColor: '#3b82f6' },
+                    { label: 'Mujeres', data: [48, 21, 13, 16, 14], backgroundColor: '#ec4899' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { 
+                    x: { stacked: false },
+                    y: { stacked: false, beginAtZero: true, title: { display: true, text: 'Cantidad de Clientes' } } 
+                },
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+    </script>
+</body>
+</html>
